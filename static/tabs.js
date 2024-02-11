@@ -3,12 +3,12 @@ function updateBadge() {
         var numTabs = tabs.length;
         chrome.action.setBadgeText({ text: numTabs.toString() });
         // Send message to popup HTML
-        chrome.runtime.sendMessage({ type: "numWindowTabsUpdated", numWindowTabs: numTabs });
+        chrome.runtime.sendMessage({ type: "numWindowTabsUpdated", numWindowTabs: numTabs }).catch(() => {});
     });
     chrome.tabs.query({ 'windowType': 'normal' }, function(tabs) {
         var numTabs = tabs.length;
         // Send message to popup HTML
-        chrome.runtime.sendMessage({ type: "numAllTabsUpdated", numAllTabs: numTabs });
+        chrome.runtime.sendMessage({ type: "numAllTabsUpdated", numAllTabs: numTabs }).catch(() => {});
     });
     
 }
@@ -16,10 +16,11 @@ function updateBadge() {
 // Update badge on initial load
 updateBadge();
 
-// Update badge when tabs are created, removed, or replaced
+// Update badge on initial load and when tabs are created, removed, or replaced
 chrome.tabs.onCreated.addListener(updateBadge);
 chrome.tabs.onRemoved.addListener(updateBadge);
 chrome.tabs.onReplaced.addListener(updateBadge);
+
 
 // Listen for message from popup
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {

@@ -3,13 +3,12 @@
     "name": "Tab Counter",
     "description": "Counts number of tabs open in window",
     "version": "1.0",
-    "permissions": ["tabs"],
+    "permissions": ["tabs", "background"],
     "action": {
       "default_popup": "popup.html",
       "default_icon": "smirk.png"
     },
     "background": {
-        "scripts": ["static/popup.js"],
         "service_worker": "static/tabs.js"
-    } 
+    }
   }

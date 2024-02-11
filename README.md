@@ -1,5 +1,5 @@
 # chrome-tab-counter
-Counts current number of tabs open in window.
+Counts current number of tabs open in window. Created and held together with ChatGPT, Gemini, and <sub><sup><sub>me</sub></sup><sub>
 
 ## Usage
 > :information_source: I'm not paying 5$ to have this on the chrome web store 
