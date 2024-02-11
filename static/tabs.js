@@ -28,6 +28,7 @@ chrome.tabs.onCreated.addListener(updateBadge);
 chrome.tabs.onRemoved.addListener(updateBadge);
 chrome.tabs.onReplaced.addListener(updateBadge);
 chrome.tabs.onHighlighted.addListener(updateBadge);
+chrome.windows.onFocusChanged.addListener(updateBadge);
 
 
 
