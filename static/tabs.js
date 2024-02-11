@@ -10,11 +10,13 @@ function updateBadge() {
         // Send message to popup HTML
         chrome.runtime.sendMessage({ type: "numAllTabsUpdated", numAllTabs: numTabs }).catch(() => {});
     });
-    chrome.tabs.query({ 'highlighted': true }, function(tabs) {
-        var numTabs = tabs.length-1 ;
-        if (numTabs > 1){
+    chrome.tabs.query({'currentWindow': true, 'highlighted': true }, function(tabs) {
+        var numTabs = tabs ? tabs.length : 0;
+        if (numTabs > 1){//first tab is always highlighted
             chrome.action.setBadgeText({ text: numTabs.toString() });
         }
+        chrome.runtime.sendMessage({ type: "numHighlightedTabsUpdated", numHighlightedTabs: numTabs }).catch(() => {});
+
     });
 }
 

@@ -12,5 +12,8 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
     else if (message.type === "numAllTabsUpdated") {
         document.getElementById("numAllTabs").innerText = message.numAllTabs;
     }
-
+    
+    if (message.type === "numHighlightedTabsUpdated") {
+        document.getElementById("numHighlightedTabs").innerText = message.numHighlightedTabs;
+    }
 });
