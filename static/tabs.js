@@ -10,7 +10,12 @@ function updateBadge() {
         // Send message to popup HTML
         chrome.runtime.sendMessage({ type: "numAllTabsUpdated", numAllTabs: numTabs }).catch(() => {});
     });
-    
+    chrome.tabs.query({ 'highlighted': true }, function(tabs) {
+        var numTabs = tabs.length-1 ;
+        if (numTabs > 1){
+            chrome.action.setBadgeText({ text: numTabs.toString() });
+        }
+    });
 }
 
 // Update badge on initial load
@@ -20,6 +25,8 @@ updateBadge();
 chrome.tabs.onCreated.addListener(updateBadge);
 chrome.tabs.onRemoved.addListener(updateBadge);
 chrome.tabs.onReplaced.addListener(updateBadge);
+chrome.tabs.onHighlighted.addListener(updateBadge);
+
 
 
 // Listen for message from popup
